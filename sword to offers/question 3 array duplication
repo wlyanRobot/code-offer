@@ -1,0 +1,38 @@
+        #以下为第3题题解
+        //判断输入是否符合要求
+        //1.指针是否为空指针
+        //2.长度是否符合要求（超限）
+        //3.数值是否超限
+        if ((numbers == nullptr) || (length < 0))
+        {
+            return false;
+        }
+        for (int i = 0 ; i < length - 1 ; ++i )
+        {
+            if (( numbers[i] < 0 ) || ( length -1 < numbers[i] ))
+            {
+                return false ;
+            }
+        }
+        //进行数值归位操作
+        
+        for (int i = 0 ; i < length - 1 ; ++i )
+        {
+            while (numbers[i] != i)
+            {
+                if( numbers[i] == numbers[ numbers[i] ] )
+                {
+                    *duplication = numbers[i];
+                    return true ;
+                }
+                
+                //swap ( numbers[i] , numbers[ numbers[i] ] ),
+                //tips,数组内容交换，由于第二个pos是numbers【i】
+                //在交换过程中，对秩进行保存
+                int buffernumber = 0;
+                buffernumber = numbers[i];
+                numbers[i] = numbers[ buffernumber ];
+                numbers[ buffernumber ] = buffernumber;
+            }
+        }
+        return false;
